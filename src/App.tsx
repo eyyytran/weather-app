@@ -1,6 +1,8 @@
-import './App.css'
+import { Route, Routes } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from './app/hooks'
-import { fetchWeather } from './features/weather/weatherSlice'
+import Home from './components/Home'
+import WeatherPage from './components/WeatherPage'
+import { getWeatherByCityName } from './features/weather/weatherSlice'
 
 function App() {
     const weather = useAppSelector(state => state.weather.weather)
@@ -8,12 +10,10 @@ function App() {
 
     return (
         <div className='App'>
-            <form>
-                <input type='text' name='searchBar' />
-                <button type='submit'>Get Weather</button>
-            </form>
-            <button onClick={() => dispatch(fetchWeather())}>IDK CLICK HERE!</button>
-            {JSON.stringify(weather[0])}
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/weather' element={<WeatherPage />} />
+            </Routes>
         </div>
     )
 }

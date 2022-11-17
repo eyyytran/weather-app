@@ -1,27 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-const WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?q=atlanta&appid=${process.env.REACT_APP_API_KEY}`
-
 interface WeatherState {
     weather: any
-    status: string
+    status: 'idle' | 'pending' | 'succeeded' | 'failed'
     error: any
 }
 
 const initialState: WeatherState = {
     weather: [],
-    status: 'idle', //idle, loading, succeeded, failed
+    status: 'idle',
     error: null,
-}
+} as WeatherState
 
-export const fetchWeather = createAsyncThunk('weather/getWeather', async () => {
-    try {
-        const response = await fetch(WEATHER_URL)
-        const json = await response.json()
-        return json
-    } catch (error) {
-        return error
-    }
+export const getWeatherByCityName = createAsyncThunk('weather/getWeather', async userInput => {
+    const cityName = 'atlanta'
+    const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_API_KEY}`
+    )
+    const data = await response.json()
+    return data
 })
 
 export const weatherSlice = createSlice({
@@ -34,14 +30,14 @@ export const weatherSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-            .addCase(fetchWeather.pending, (state, action) => {
-                state.status = 'loading'
+            .addCase(getWeatherByCityName.pending, (state, action) => {
+                state.status = 'pending'
             })
-            .addCase(fetchWeather.fulfilled, (state, { payload }) => {
+            .addCase(getWeatherByCityName.fulfilled, (state, { payload }) => {
                 state.status = 'succeeded'
                 state.weather = [...state.weather, payload]
             })
-            .addCase(fetchWeather.rejected, (state, action) => {
+            .addCase(getWeatherByCityName.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message
             })
