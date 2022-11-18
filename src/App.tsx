@@ -1,18 +1,24 @@
 import { Route, Routes } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from './app/hooks'
+import CurrentWeather from './components/CurrentWeather'
 import Home from './components/Home'
-import WeatherPage from './components/WeatherPage'
-import { getWeatherByCityName } from './features/weather/weatherSlice'
+import WeatherApp from './components/WeatherApp'
 
 function App() {
-    const weather = useAppSelector(state => state.weather.weather)
-    const dispatch = useAppDispatch()
-
     return (
         <div className='App'>
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/weather' element={<WeatherPage />} />
+                <Route path='/weather' element={<WeatherApp />}>
+                    <Route path='your-weather' element={<CurrentWeather />} />
+                </Route>
+                <Route
+                    path='*'
+                    element={
+                        <main>
+                            <p>404: There's nothing here</p>
+                        </main>
+                    }
+                />
             </Routes>
         </div>
     )

@@ -120,3 +120,112 @@ a {
     background-color: #d76b4d;
     transition: background-color 350ms ease-in-out;
 }
+
+.container {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-rows: auto var(--navbarHeight);
+}
+
+.navbar {
+    grid-row: 2/2;
+}
+
+.page {
+    height: calc(100vh - var(--navbarHeight));
+    width: 100vw;
+    padding: 2rem;
+    background-color: var(--apricot);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.module {
+    background-color: #fffaf4;
+    height: 100%;
+    max-height: 800px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-status {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fffaf4;
+}
+
+.top-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.top-section h2 {
+    margin: 10px 0 0 0;
+}
+
+.favorites-btn {
+    position: absolute;
+    top: 0px;
+    right: -20%;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    padding: 7px;
+    transition: all 300ms ease-in-out;
+}
+
+.favorites-btn:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+}
+
+.middle-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-section {
+    min-height: 80px;
+    max-height: 100px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-section p {
+    margin: 0 0 0 5px;
+}
+
+.bottom-section {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+}
+
+.medium-section {
+    font-size: 20px;
+    text-align: center;
+}
