@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import IWeatherObj from '../../interfaces/IWeatherObj'
 
 interface WeatherState {
     currentWeather: any
+    favoriteLocations: Array<IWeatherObj>
     status: 'idle' | 'pending' | 'succeeded' | 'failed'
     error: any
 }
@@ -13,7 +15,7 @@ type Coordinates = {
 
 const initialState: WeatherState = {
     currentWeather: {},
-
+    favoriteLocations: [],
     status: 'idle',
     error: null,
 } as WeatherState
@@ -25,6 +27,7 @@ export const getWeatherByCityName = createAsyncThunk(
             `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.REACT_APP_API_KEY}&units=imperial`
         )
         const data = await response.json()
+        console.log(data)
         return data
     }
 )
@@ -43,12 +46,12 @@ export const getWeatherByCoordinates = createAsyncThunk(
 
 const formatTime = (unix: number) => {
     const date = new Date(unix * 1000)
-    const hours = date.getHours().toString()
+    const hours = date.getHours().toString().padStart(2, '0')
     const mins = date.getMinutes().toString().substr(-2)
     return `${hours}:${mins}`
 }
 
-const cleanCurrentWeatherData = (payload: any) => {
+const cleanCurrentWeatherData = (payload: any): IWeatherObj => {
     return {
         name: payload.name,
         id: payload.id,
@@ -71,7 +74,14 @@ const cleanCurrentWeatherData = (payload: any) => {
 export const weatherSlice = createSlice({
     name: 'weather',
     initialState,
-    reducers: {},
+    reducers: {
+        addToFavorites: state => {
+            state.favoriteLocations.push(state.currentWeather)
+        },
+        removeFromFavorites: (state, { payload }) => {
+            state.favoriteLocations = state.favoriteLocations.filter(obj => obj.id !== payload)
+        },
+    },
     extraReducers(builder) {
         builder
             .addCase(getWeatherByCityName.pending, (state, action) => {
@@ -98,5 +108,5 @@ export const weatherSlice = createSlice({
             })
     },
 })
-
+export const { addToFavorites, removeFromFavorites } = weatherSlice.actions
 export default weatherSlice.reducer

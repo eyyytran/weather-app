@@ -7,18 +7,50 @@ import {
     faTemperatureHigh,
     faTemperatureLow,
     faWind,
+    faHeart as faSolidHeart,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { useDispatch } from 'react-redux'
+import { addToFavorites, removeFromFavorites } from '../features/weather/weatherSlice'
+import IWeatherObj from '../interfaces/IWeatherObj'
+import { useEffect, useState } from 'react'
 
 const WeatherDetails = () => {
     const weather = useAppSelector(state => state.weather.currentWeather)
+    const favorites = useAppSelector(state => state.weather.favoriteLocations)
+    const dispatch = useDispatch()
+
+    const [isFavorited, setIsFavorited] = useState(false)
+
+    useEffect(() => {
+        const determineIfFavorited = () => {
+            if (favorites.find((obj: IWeatherObj) => obj.id === weather.id)) {
+                setIsFavorited(true)
+            } else {
+                setIsFavorited(false)
+            }
+        }
+
+        determineIfFavorited()
+    }, [favorites, weather.id])
+
     return (
         <>
             <div className='top-section'>
                 <h2>{weather.name}</h2>
                 <div className='favorites-btn'>
-                    <FontAwesomeIcon icon={faHeart} size='2x' />
+                    <FontAwesomeIcon
+                        icon={isFavorited ? faSolidHeart : faHeart}
+                        size='2x'
+                        onClick={() => {
+                            if (isFavorited) {
+                                dispatch(removeFromFavorites(weather.id))
+                            } else {
+                                dispatch(addToFavorites())
+                            }
+                        }}
+                    />
                 </div>
 
                 <img

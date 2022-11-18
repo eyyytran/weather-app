@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 :root {
-    --navbarHeight: 70px;
+    --searchbarHeight: 70px;
 }
 
 :root {
@@ -125,15 +125,107 @@ a {
     overflow-y: hidden;
     overflow-x: hidden;
     display: grid;
-    grid-template-rows: auto var(--navbarHeight);
+    grid-template-rows: auto var(--searchbarHeight);
+    position: absolute;
 }
 
-.navbar {
+.saved-locations-container {
+    position: fixed;
+    top: 20px;
+    width: 100vw;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.5rem;
+    transform: translateY(calc(90vh - var(--searchbarHeight)));
+    transition: transform 300ms ease-in-out;
+}
+
+.is-open {
+    transform: translateY(calc(0 - var(--searchbarHeight)));
+    transition: transform 300ms ease-in-out;
+}
+
+.tab {
+    background-color: #a5600b;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    border-radius: 50% 50% 0 0;
+    padding: 10px 0;
+}
+
+.saved-locations {
+    height: 85vh;
+    width: 100%;
+    max-width: 400px;
+    background-color: #a5600b;
+    border-radius: 10px 10px 0 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    overflow-y: scroll;
+}
+
+.location-card {
+    height: 200px;
+    width: 200px;
+    background-color: #fffaf4;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.high-temp {
+    color: var(--darkOrange);
+}
+
+.low-temp {
+    color: var(--navy);
+}
+
+.search-container {
     grid-row: 2/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffaf4;
+    position: relative;
+    z-index: 3;
+}
+
+.search-input {
+    width: 200px;
+    height: 45px;
+    border-radius: 20px 0 0 20px;
+    border: 3px solid var(--orange);
+    border-right: none;
+    font-size: 1em;
+    line-height: 30px;
+    padding: 0 20px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.search-btn {
+    height: 45px;
+    width: 45px;
+    border-radius: 0 50% 50% 0;
+    border: none;
+    background-color: var(--orange);
+    position: absolute;
 }
 
 .page {
-    height: calc(100vh - var(--navbarHeight));
+    height: calc(100vh - var(--searchbarHeight));
     width: 100vw;
     padding: 2rem;
     background-color: var(--apricot);
