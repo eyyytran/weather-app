@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import IWeatherObj from '../interfaces/IWeatherObj'
 
 interface Props {

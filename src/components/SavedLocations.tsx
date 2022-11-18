@@ -1,9 +1,9 @@
-import { faBars } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import { useAppSelector } from '../app/hooks'
-import IWeatherObj from '../interfaces/IWeatherObj'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 import SavedLocationCard from './SavedLocationCard'
+import IWeatherObj from '../interfaces/IWeatherObj'
 
 const SavedLocations = () => {
     const favorites = useAppSelector(state => state.weather.favoriteLocations)

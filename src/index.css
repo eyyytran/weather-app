@@ -9,7 +9,7 @@
     --orange: #ff9f1c;
     --apricot: #ffbf69;
     --navy: #274076;
-    --purple: #513b82;
+    --white: #fffaf4;
 }
 
 html,
@@ -175,7 +175,7 @@ a {
 .location-card {
     height: 200px;
     width: 200px;
-    background-color: #fffaf4;
+    background-color: var(--white);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -196,7 +196,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fffaf4;
+    background-color: var(--white);
     position: relative;
     z-index: 3;
 }
@@ -235,7 +235,7 @@ a {
 }
 
 .module {
-    background-color: #fffaf4;
+    background-color: var(--white);
     height: 100%;
     max-height: 800px;
     width: 100%;
@@ -255,7 +255,7 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #fffaf4;
+    background: var(--white);
 }
 
 .top-section {

@@ -9,12 +9,12 @@ import {
     faWind,
     faHeart as faSolidHeart,
 } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-regular-svg-icons'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addToFavorites, removeFromFavorites } from '../features/weather/weatherSlice'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import IWeatherObj from '../interfaces/IWeatherObj'
-import { useEffect, useState } from 'react'
 
 const WeatherDetails = () => {
     const weather = useAppSelector(state => state.weather.currentWeather)
